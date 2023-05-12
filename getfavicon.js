@@ -1,36 +1,32 @@
-function getFavicon() {
-  var url = document.getElementById("url").value;
+function obterFavicon() {
+        // Link do site fornecido pelo usuário
+        var siteLink = document.getElementById("siteLink").value;
 
-  // Create a new XMLHttpRequest object.
-  var xhr = new XMLHttpRequest();
+        // Cria um elemento canvas
+        var canvas = document.createElement("canvas");
 
-  // Set the request method to "GET".
-  xhr.open("GET", url + "/favicon.ico", true);
+        // Define o tamanho do canvas
+        canvas.width = 42;
+        canvas.height = 42;
 
-  // Set the responseType to "blob".
-  xhr.responseType = "blob";
+        // Cria um contexto 2D para o canvas
+        var context = canvas.getContext("2d");
 
-  // Send the request.
-  xhr.send();
+        // Cria um elemento de imagem
+        var img = new Image();
 
-  // Handle the response.
-  xhr.onload = function() {
-    // Check the response status code.
-    if (xhr.status === 200) {
-      // The request was successful.
-      // Get the favicon data.
-      var faviconData = xhr.response;
+        // Define a URL do favicon do site com tamanho 42x42 pixels
+        img.src = "https://www.google.com/s2/favicons?sz=64&domain=" + siteLink.replace("https://", "").replace("http://", "") + "&s=42";
 
-      // Convert the favicon data to an image URL.
-      var imageURL = window.URL.createObjectURL(faviconData);
+        // Quando a imagem carregar, desenha-a no contexto 2D com um tamanho de 42x42 pixels
+        img.onload = function() {
+          context.drawImage(img, 0, 0, 42, 42);
 
-      // Display the image on the page.
-      document.getElementById("favicon").src = imageURL;
-    } else {
-      // The request failed.
-      alert("Failed to get favicon.");
-    }
-  };
-}
+          // Converte o canvas em um elemento de imagem
+          var canvasImg = new Image();
+          canvasImg.src = canvas.toDataURL("image/png");
 
-document.getElementById("btnSubmit").addEventListener("click", getFavicon);
+          // Adiciona o elemento de imagem à página
+          document.getElementById("favicon").appendChild(canvasImg);
+        };
+      }

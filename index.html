@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Get Favicon</title>
-</head>
-<body>
-  <label for="url">Enter URL:</label>
-  <input type="text" id="url" name="url" placeholder="https://my-subs.co/">
-  <button id="btnSubmit" type="submit">Get Favicon</button>
-  <br>
-  <img id="favicon" src="" alt="Favicon" width="42" height="42">
-  <script src="getfavicon.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <title>Exemplo de obtenção de favicon</title>
+  </head>
+  <body>
+    <h1>Obtenha o favicon de um site</h1>
+    <label for="siteLink">Digite o link do site:</label>
+    <input type="text" id="siteLink">
+    <button onclick="obterFavicon()">Obter Favicon</button>
+    <div id="favicon"></div>
+    <script src="getfavicon.js"></script>
+  </body>
 </html>
