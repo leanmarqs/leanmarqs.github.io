@@ -4,10 +4,11 @@
   <title>Get Favicon</title>
 </head>
 <body>
-  <input type="text" id="url" placeholder="Enter the link of the website">
-  <button onclick="getFavicon(document.getElementById('url').value)">Get Favicon</button>
-  <img id="favicon" src="" alt="Favicon">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <label for="url">Enter URL:</label>
+  <input type="text" id="url" name="url" placeholder="https://www.example.com">
+  <button id="btnSubmit" type="submit">Get Favicon</button>
+  <br>
+  <img id="favicon" src="" alt="Favicon" width="42" height="42">
   <script src="getfavicon.js"></script>
 </body>
 </html>

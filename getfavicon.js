@@ -1,78 +1,36 @@
-function getFavicon(url) {
+function getFavicon() {
+  var url = document.getElementById("url").value;
+
   // Create a new XMLHttpRequest object.
   var xhr = new XMLHttpRequest();
 
   // Set the request method to "GET".
-  xhr.open("GET", "https://www.google.com/s2/favicons?sz=64&domain=" + url.replace("https://", "").replace("http://", "") + "&s=42");
+  xhr.open("GET", url + "/favicon.ico", true);
 
-  // Add a load event listener to the xhr object.
-  xhr.addEventListener('load', function() {
-    // Check the response status code.
-    if (xhr.status === 200) {
-      // The request was successful.
-      // Create a new canvas element.
-      var canvas = document.createElement("canvas");
-
-      // Set the canvas width and height to 42 pixels.
-      canvas.width = 42;
-      canvas.height = 42;
-
-      // Create a new 2D context for the canvas.
-      var ctx = canvas.getContext("2d");
-
-      // Draw the favicon data on the canvas.
-      ctx.drawImage(xhr.response, 0, 0);
-
-      // Convert the canvas to an image.
-      var image = canvas.toDataURL("image/png");
-
-      // Display the image on the page.
-      document.getElementById("favicon").src = image;
-    } else {
-      // The request failed.
-      alert("The request failed.");
-    }
-  });
+  // Set the responseType to "blob".
+  xhr.responseType = "blob";
 
   // Send the request.
   xhr.send();
-}
-function getFavicon(url) {
-  // Create a new XMLHttpRequest object.
-  var xhr = new XMLHttpRequest();
 
-  // Set the request method to "GET".
-  xhr.open("GET", "https://www.google.com/s2/favicons?sz=64&domain=" + url.replace("https://", "").replace("http://", "") + "&s=42");
-
-  // Add a load event listener to the xhr object.
-  xhr.addEventListener('load', function() {
+  // Handle the response.
+  xhr.onload = function() {
     // Check the response status code.
     if (xhr.status === 200) {
       // The request was successful.
-      // Create a new canvas element.
-      var canvas = document.createElement("canvas");
+      // Get the favicon data.
+      var faviconData = xhr.response;
 
-      // Set the canvas width and height to 42 pixels.
-      canvas.width = 42;
-      canvas.height = 42;
-
-      // Create a new 2D context for the canvas.
-      var ctx = canvas.getContext("2d");
-
-      // Draw the favicon data on the canvas.
-      ctx.drawImage(xhr.response, 0, 0);
-
-      // Convert the canvas to an image.
-      var image = canvas.toDataURL("image/png");
+      // Convert the favicon data to an image URL.
+      var imageURL = window.URL.createObjectURL(faviconData);
 
       // Display the image on the page.
-      document.getElementById("favicon").src = image;
+      document.getElementById("favicon").src = imageURL;
     } else {
       // The request failed.
-      alert("The request failed.");
+      alert("Failed to get favicon.");
     }
-  });
-
-  // Send the request.
-  xhr.send();
+  };
 }
+
+document.getElementById("btnSubmit").addEventListener("click", getFavicon);
