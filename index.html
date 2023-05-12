@@ -1,49 +1,13 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Exemplo de obtenção de favicon</title>
-  </head>
-  <body>
-    <h1>Obtenha o favicon de um site</h1>
-    <label for="siteLink">Digite o link do site:</label>
-    <input type="text" id="siteLink">
-    <button onclick="obterFavicon()">Obter Favicon</button>
-    <div id="favicon"></div>
-
-    <script>
-      function obterFavicon() {
-        // Link do site fornecido pelo usuário
-        var siteLink = document.getElementById("siteLink").value;
-
-        // Cria um elemento canvas
-        var canvas = document.createElement("canvas");
-
-        // Define o tamanho do canvas
-        canvas.width = 42;
-        canvas.height = 42;
-
-        // Cria um contexto 2D para o canvas
-        var context = canvas.getContext("2d");
-
-        // Cria um elemento de imagem
-        var img = new Image();
-
-        // Define a URL do favicon do site com tamanho 42x42 pixels
-        img.src = "https://www.google.com/s2/favicons?sz=64&domain=" + siteLink.replace("https://", "").replace("http://", "") + "&s=42";
-
-        // Quando a imagem carregar, desenha-a no contexto 2D com um tamanho de 42x42 pixels
-        img.onload = function() {
-          context.drawImage(img, 0, 0, 42, 42);
-
-          // Converte o canvas em um elemento de imagem
-          var canvasImg = new Image();
-          canvasImg.src = canvas.toDataURL("image/png");
-
-          // Adiciona o elemento de imagem à página
-          document.getElementById("favicon").appendChild(canvasImg);
-        };
-      }
-    </script>
-  </body>
+<head>
+  <title>Get Favicon</title>
+</head>
+<body>
+  <input type="text" id="url" placeholder="Enter the link of the website">
+  <button onclick="getFavicon()">Get Favicon</button>
+  <img id="favicon" src="" alt="Favicon">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="getfavicon.js"></script>
+</body>
 </html>
