@@ -19,8 +19,8 @@
         // Cria um elemento de imagem
         var img = document.createElement("img");
 
-        // Define a URL do favicon do site
-        img.src = "https://www.google.com/s2/favicons?sz=64&domain=" + siteLink.replace("https://", "").replace("http://", "");
+        // Define a URL do favicon do site com tamanho 42x42 pixels
+        img.src = "https://www.google.com/s2/favicons?sz=42&domain=" + siteLink.replace("https://", "").replace("http://", "");
 
         // Adiciona o elemento de imagem à página
         document.getElementById("favicon").appendChild(img);
