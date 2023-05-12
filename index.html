@@ -29,8 +29,8 @@
         // Cria um elemento de imagem
         var img = new Image();
 
-        // Define a URL do favicon do site
-        img.src = "https://www.google.com/s2/favicons?sz=64&domain=" + siteLink.replace("https://", "").replace("http://", "");
+        // Define a URL do favicon do site com tamanho 42x42 pixels
+        img.src = "https://www.google.com/s2/favicons?sz=64&domain=" + siteLink.replace("https://", "").replace("http://", "") + "&s=42";
 
         // Quando a imagem carregar, desenha-a no contexto 2D com um tamanho de 42x42 pixels
         img.onload = function() {
@@ -38,3 +38,12 @@
 
           // Converte o canvas em um elemento de imagem
           var canvasImg = new Image();
+          canvasImg.src = canvas.toDataURL("image/png");
+
+          // Adiciona o elemento de imagem à página
+          document.getElementById("favicon").appendChild(canvasImg);
+        };
+      }
+    </script>
+  </body>
+</html>
