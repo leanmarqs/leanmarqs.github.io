@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Exemplo de obtenção de favicon</title>
+  </head>
+  <body>
+    <h1>Obtenha o favicon de um site</h1>
+    <label for="siteLink">Digite o link do site:</label>
+    <input type="text" id="siteLink">
+    <button onclick="obterFavicon()">Obter Favicon</button>
+    <div id="favicon"></div>
+
+    <script>
+      function obterFavicon() {
+        // Link do site fornecido pelo usuário
+        var siteLink = document.getElementById("siteLink").value;
+
+        // Cria um elemento de imagem
+        var img = document.createElement("img");
+
+        // Define a URL do favicon do site
+        img.src = "https://www.google.com/s2/favicons?sz=64&domain=" + siteLink.replace("https://", "").replace("http://", "");
+
+        // Adiciona o elemento de imagem à página
+        document.getElementById("favicon").appendChild(img);
+      }
+    </script>
+  </body>
+</html>
