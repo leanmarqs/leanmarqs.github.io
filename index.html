@@ -2,46 +2,59 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Exemplo de obtenção de favicon</title>
+    <title>Obtenha o favicon de um site</title>
   </head>
   <body>
     <h1>Obtenha o favicon de um site</h1>
     <label for="siteLink">Digite o link do site:</label>
     <input type="text" id="siteLink">
-    <button onclick="obterFavicon()">Obter Favicon</button>
-    <div id="favicon"></div>
+    <button onclick="getFavicon()">Obter Favicon</button>
+    <br>
+    <img id="favicon">
 
     <script>
-      function obterFavicon() {
+      function getFavicon() {
         // Link do site fornecido pelo usuário
-        var siteLink = document.getElementById("siteLink").value;
+        var url = document.getElementById("siteLink").value;
 
-        // Cria um elemento canvas
-        var canvas = document.createElement("canvas");
+        // Cria um novo XMLHttpRequest object.
+        var xhr = new XMLHttpRequest();
 
-        // Define o tamanho do canvas
-        canvas.width = 42;
-        canvas.height = 42;
+        // Set the request method to "GET".
+        xhr.open("GET", "https://www.google.com/s2/favicons?sz=64&domain=" + url.replace("https://", "").replace("http://", "") + "&s=42");
 
-        // Cria um contexto 2D para o canvas
-        var context = canvas.getContext("2d");
+        // Send the request.
+        xhr.send();
 
-        // Cria um elemento de imagem
-        var img = new Image();
+        // Check the response status code.
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            // The request was successful.
+            // Get the favicon data.
+            var faviconData = xhr.responseText;
 
-        // Define a URL do favicon do site com tamanho 42x42 pixels
-        img.src = "https://www.google.com/s2/favicons?sz=64&domain=" + siteLink.replace("https://", "").replace("http://", "") + "&s=42";
+            // Create a new canvas element.
+            var canvas = document.createElement("canvas");
 
-        // Quando a imagem carregar, desenha-a no contexto 2D com um tamanho de 42x42 pixels
-        img.onload = function() {
-          context.drawImage(img, 0, 0, 42, 42);
+            // Set the canvas width and height to 42 pixels.
+            canvas.width = 42;
+            canvas.height = 42;
 
-          // Converte o canvas em um elemento de imagem
-          var canvasImg = new Image();
-          canvasImg.src = canvas.toDataURL("image/png");
+            // Create a new 2D context for the canvas.
+            var ctx = canvas.getContext("2d");
 
-          // Adiciona o elemento de imagem à página
-          document.getElementById("favicon").appendChild(canvasImg);
+            // Draw the favicon data on the canvas.
+            ctx.drawImage(faviconData, 0, 0);
+
+            // Convert the canvas to an image.
+            var image = canvas.toDataURL("image/png");
+
+            // Display the image on the page.
+            document.getElementById("favicon").src = image;
+          } else {
+            // The request failed.
+            alert("The request failed.");
+          }
         };
       }
     </script>
