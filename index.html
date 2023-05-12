@@ -5,7 +5,7 @@
 </head>
 <body>
   <input type="text" id="url" placeholder="Enter the link of the website">
-  <button onclick="getFavicon()">Get Favicon</button>
+  <button onclick="getFavicon(document.getElementById('url').value)">Get Favicon</button>
   <img id="favicon" src="" alt="Favicon">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="getfavicon.js"></script>
