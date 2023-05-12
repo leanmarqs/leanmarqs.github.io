@@ -16,15 +16,25 @@
         // Link do site fornecido pelo usuário
         var siteLink = document.getElementById("siteLink").value;
 
+        // Cria um elemento canvas
+        var canvas = document.createElement("canvas");
+
+        // Define o tamanho do canvas
+        canvas.width = 42;
+        canvas.height = 42;
+
+        // Cria um contexto 2D para o canvas
+        var context = canvas.getContext("2d");
+
         // Cria um elemento de imagem
-        var img = document.createElement("img");
+        var img = new Image();
 
-        // Define a URL do favicon do site com tamanho 42x42 pixels
-        img.src = "https://www.google.com/s2/favicons?sz=42&domain=" + siteLink.replace("https://", "").replace("http://", "");
+        // Define a URL do favicon do site
+        img.src = "https://www.google.com/s2/favicons?sz=64&domain=" + siteLink.replace("https://", "").replace("http://", "");
 
-        // Adiciona o elemento de imagem à página
-        document.getElementById("favicon").appendChild(img);
-      }
-    </script>
-  </body>
-</html>
+        // Quando a imagem carregar, desenha-a no contexto 2D com um tamanho de 42x42 pixels
+        img.onload = function() {
+          context.drawImage(img, 0, 0, 42, 42);
+
+          // Converte o canvas em um elemento de imagem
+          var canvasImg = new Image();
